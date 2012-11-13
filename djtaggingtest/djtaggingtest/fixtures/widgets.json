@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "djtaggingtest.widget", "fields": {"name": "Dialog", "user": 1}}, {"pk": 2, "model": "djtaggingtest.widget", "fields": {"name": "Frame", "user": 2}}]
