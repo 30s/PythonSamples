@@ -1,0 +1,3 @@
+target = MyMath
+sources = sipMyMathcmodule.cpp sipMyMathMyMath.cpp
+headers = sipAPIMyMath.h
