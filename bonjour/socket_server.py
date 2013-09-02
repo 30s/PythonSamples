@@ -11,25 +11,25 @@ class SocketTCPHandler(SocketServer.BaseRequestHandler):
     def handle(self):
         logging.debug("client connected: " + str(self.request.getpeername()))
         while True:
-            cmd = self.request.recv(1024)
+            cmd = self.request.recv(1024).strip()
             logging.debug("data received: " + cmd)
             if cmd == 'voltage':
-                self.request.send("%d" % random.randint(0, 300))
+                resp = "voltage %d\n" % random.randint(0, 300)
             elif cmd == 'current':
-                self.request.send("%d" % random.randint(0, 50))
+                resp = "current %d\n" % random.randint(0, 50)
             elif cmd == 'frequency':
-                self.request.send("%d" % random.randint(50, 60))
+                resp = "frequency %d\n" % random.randint(50, 60)
             elif cmd == 'switch_on':
-                self.request.send("on")
+                resp = "on\n"
             elif cmd == 'switch_off':
-                self.request.send("off")
-            elif cmd == 'frequency':
-                self.request.send("%d" % random.randint(50, 60))
-            elif cmd == 'quit':
+                resp = "off\n"
+            elif cmd == 'quit' or len(cmd) == 0:
                 logging.debug("client disconnected: " + str(self.request.getpeername()))
                 break
             else:
-                self.request.send(cmd)
+                resp = cmd
+            self.request.send(resp)
+            logging.debug("data sent: " + resp)
 
 
 
